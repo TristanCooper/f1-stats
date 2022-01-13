@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState, useRef, RefObject } from "react";
-import { Card, CardHeader, CardContent, IconButton, CardMedia, CircularProgress } from "@material-ui/core";
+import { FC, useEffect, useState } from "react";
+import { Card, CardHeader, IconButton, CardMedia } from "@material-ui/core";
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import Skeleton from '@material-ui/lab/Skeleton';
 
