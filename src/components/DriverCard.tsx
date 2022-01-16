@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Card, CardHeader, IconButton, CardMedia } from "@material-ui/core";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -12,15 +13,15 @@ type DriverCardProps = {
 
 const DriverCard: FC<DriverCardProps> = ({ driver }) => {
   const [driverImageSrc, setDriverImageSrc] = useState('');
+  const storage = getStorage();
+  const normalisedDriverName = `${driver.givenName}-${driver.familyName}`.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, "");
+  const driverPathReference = ref(storage, `${normalisedDriverName}-1.png`);
 
   useEffect(() => {
-    fetch(driver.driverImageUrl, { method: 'GET' })
-      .then(response => response.json())
-      .then(data => {
-        const driverImageBlock = Object.keys(data.query.pages)[0];
-        setDriverImageSrc(data.query.pages[driverImageBlock].thumbnail.source);
-      })
-  }, [driver.driverImageUrl])
+    getDownloadURL(driverPathReference).then(url => {
+      setDriverImageSrc(url);
+    });
+  }, [driverPathReference])
 
   return (
     <AnimatedContainer>

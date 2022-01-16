@@ -3,9 +3,9 @@ import {
   Routes,
   Route,
   Link,
-  Outlet
+  Outlet,
 } from "react-router-dom";
-
+import Navbar from "./components/NavBar";
 import Drivers from './pages/Drivers';
 
 export default function App() {
@@ -21,13 +21,7 @@ export default function App() {
 function Layout() {
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Drivers</Link>
-          </li>
-        </ul>
-      </nav>
+      <Navbar />
       <Outlet />
     </div>
   )
