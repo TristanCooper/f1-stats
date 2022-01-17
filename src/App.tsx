@@ -2,7 +2,6 @@ import React from "react";
 import {
   Routes,
   Route,
-  Link,
   Outlet,
 } from "react-router-dom";
 import StyledToolbar from "./components/Toolbar";

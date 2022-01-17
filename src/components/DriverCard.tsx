@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Card, CardHeader, IconButton, CardMedia, Typography, makeStyles } from "@material-ui/core";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import DoubleArrowIconOutlined from '@material-ui/icons/DoubleArrow';
 import Skeleton from '@material-ui/lab/Skeleton';
 

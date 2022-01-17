@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
-import { Card, CardContent, Container, Paper } from "@material-ui/core";
+import { Card, CardContent, Container } from "@material-ui/core";
 
 import DriverCard from "../components/DriverCard";
 import { makeStyles } from "@material-ui/core/styles";
