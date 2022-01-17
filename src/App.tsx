@@ -5,7 +5,7 @@ import {
   Link,
   Outlet,
 } from "react-router-dom";
-import Navbar from "./components/NavBar";
+import StyledToolbar from "./components/Toolbar";
 import Drivers from './pages/Drivers';
 
 export default function App() {
@@ -21,7 +21,7 @@ export default function App() {
 function Layout() {
   return (
     <div>
-      <Navbar />
+      <StyledToolbar />
       <Outlet />
     </div>
   )

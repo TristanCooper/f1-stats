@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
-import { Container, Paper } from "@material-ui/core";
+import { Card, CardContent, Container, Paper } from "@material-ui/core";
 
 import DriverCard from "../components/DriverCard";
+import { makeStyles } from "@material-ui/core/styles";
 
 export type Driver = {
   driverId: string;
@@ -12,43 +13,45 @@ export type Driver = {
   familyName: string;
 }
 
+const useStyles = makeStyles(theme => ({
+  pageContainer: {
+    display: 'flex',
+    padding: theme.spacing(2),
+    gap: theme.spacing(2),
+  },
+  driverContainer: {
+    flex: '1'
+  },
+  infoContainer: {
+    flex: '1',
+    height: '100%',
+  },
+}));
+
 export default function Drivers() {
   const [drivers, setDrivers] = useState<Driver[] | []>([]);
+  const classes = useStyles();
 
   useEffect(() => {
-    fetch('http://ergast.com/api/f1/current/drivers.json')
+    fetch('https://ergast.com/api/f1/current/drivers.json')
       .then(response => response.json())
-      .then(data => {
-        const driversData: Driver[] = data.MRData.DriverTable.Drivers;
-        return driversData.map(driverData => {
-          return {
-            ...driverData,
-            driverImageUrl: `https://en.wikipedia.org/w/api.php?origin=*&action=query&titles=${driverData.givenName}_${driverData.familyName}&prop=pageimages&format=json&pithumbsize=1000`
-          }
-        })
-      })
+      .then(data => data.MRData.DriverTable.Drivers)
       .then(result => setDrivers(result))
   }, []);
 
   return (
     <div>
-      <Typography
-        variant="h2"
-        color="textPrimary"
-        align="center"
-        gutterBottom
-      >
-        Drivers
-      </Typography>
-
-      <Container>
-        <Grid container spacing={3}>
+      <Container className={classes.pageContainer}>
+        <Grid className={classes.driverContainer} container spacing={3}>
           {drivers.map(driver => (
-            <Grid key={driver.driverId} item xs={12} sm={6} md={3}>
+            <Grid key={driver.driverId} item xs={12} sm={6} md={6}>
               <DriverCard driver={driver} />
             </Grid>
           ))}
         </Grid>
+        <Card className={classes.infoContainer}>
+          <CardContent>WIP Driver Info Panel</CardContent>
+        </Card>
       </Container>
     </div>
   );
