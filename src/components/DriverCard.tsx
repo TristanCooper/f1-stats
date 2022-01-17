@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { Card, CardHeader, IconButton, CardMedia, Typography, makeStyles } from "@material-ui/core";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import DoubleArrowIconOutlined from '@material-ui/icons/DoubleArrow';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { Driver } from "../pages/Drivers";
@@ -24,7 +25,17 @@ const useStyles = makeStyles(theme => ({
   },
   cardHeader: {
     flex: '1',
-  }
+    'flex-wrap': 'wrap',
+    display: 'flex',
+  },
+  driverName: {
+    flex: '1',
+    textAlign: 'center',
+  },
+  driverButton: {
+    flex: '1 0 100%',
+    textAlign: 'center',
+  },
 }));
 
 const DriverCard: FC<DriverCardProps> = ({ driver }) => {
@@ -55,14 +66,17 @@ const DriverCard: FC<DriverCardProps> = ({ driver }) => {
         }
         <CardHeader
           className={classes.cardHeader}
+          classes={{
+            action: classes.driverButton,
+          }}
           title={
-            <Typography noWrap variant="h5">
+            <Typography className={classes.driverName} noWrap gutterBottom variant="h5">
               {driver.givenName} {driver.familyName}
             </Typography>
           }
           action={
             <IconButton>
-              <EmojiEmotionsIcon />
+              <DoubleArrowIconOutlined />
             </IconButton>
           }
         />

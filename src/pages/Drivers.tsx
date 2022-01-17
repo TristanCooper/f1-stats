@@ -20,6 +20,8 @@ const useStyles = makeStyles(theme => ({
     gap: theme.spacing(2),
   },
   driverContainer: {
+    maxHeight: 'calc(100vh - 80px)',
+    overflow: 'auto',
     flex: '1'
   },
   infoContainer: {
@@ -44,7 +46,7 @@ export default function Drivers() {
       <Container className={classes.pageContainer}>
         <Grid className={classes.driverContainer} container spacing={3}>
           {drivers.map(driver => (
-            <Grid key={driver.driverId} item xs={12} sm={6} md={6}>
+            <Grid key={driver.driverId} item xs={12} sm={12} md={6}>
               <DriverCard driver={driver} />
             </Grid>
           ))}
